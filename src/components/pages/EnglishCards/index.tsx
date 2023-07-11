@@ -5,7 +5,7 @@ import CardList from '../../shared/CardList';
 
 const EnglishCards: FC = () => {
   return (
-    <div className="flex flex-col items-center font-thin py-10 bg-gray-100">
+    <div className="flex flex-col items-center font-thin mt-4 bg-gray-100">
       <h1 className="text-3xl font-normal mb-4">Your cards</h1>
       <SearchCardField />
       <CreateCardField />
