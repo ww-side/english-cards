@@ -6,13 +6,17 @@ import { useAppSelector } from '../../../hooks/redux.ts';
 
 const CardList: FC = () => {
   const { cards } = useAppSelector(state => state.cards);
-  const { filterValue } = useAppSelector(state => state.cards);
+  const { filterValue, filterLabelValue } = useAppSelector(
+    state => state.cards
+  );
 
   const ITEMS_PER_PAGE = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredTasks = cards.filter(card =>
-    card.title.toLowerCase().includes(filterValue.toLowerCase())
+  const filteredTasks = cards.filter(
+    card =>
+      card.title.toLowerCase().includes(filterValue.toLowerCase()) &&
+      card.label.toLowerCase().includes(filterLabelValue.toLowerCase())
   );
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -24,6 +28,8 @@ const CardList: FC = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+
+  console.log(cards);
 
   return (
     <DragDropContext>

@@ -6,12 +6,14 @@ interface cardsState {
   cards: Card[];
   filterValue: string;
   label: string;
+  filterLabelValue: string;
 }
 
 const initialState: cardsState = {
   cards: [],
   filterValue: '',
   label: '',
+  filterLabelValue: '',
 };
 
 const savedState = localStorage.getItem('cardsState');
@@ -59,6 +61,10 @@ export const cardsSlice = createSlice({
     },
     setFilterValue(state, action: PayloadAction<string>) {
       state.filterValue = action.payload;
+      saveStateToLocalStorage(state);
+    },
+    setFilterLabelValue(state, action: PayloadAction<string>) {
+      state.filterLabelValue = action.payload;
       saveStateToLocalStorage(state);
     },
   },
