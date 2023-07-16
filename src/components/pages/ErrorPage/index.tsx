@@ -1,6 +1,6 @@
-import mike from '../../../assets/mike.png';
-import Button from '../../common/Button';
 import { Link } from 'react-router-dom';
+import Button from '../../common/Button/index.tsx';
+import mike from '../../../assets/img/mike.png';
 
 const ErrorPage = () => {
   return (
