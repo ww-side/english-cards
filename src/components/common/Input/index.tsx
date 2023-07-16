@@ -3,8 +3,8 @@ import { nanoid as id } from '@reduxjs/toolkit';
 
 interface InputProps {
   placeholder: string;
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 const Input: FC<InputProps> = ({ placeholder, value, onChange }) => {
