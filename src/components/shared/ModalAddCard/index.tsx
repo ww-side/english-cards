@@ -22,7 +22,11 @@ const ModalAddCard: FC<ModalAddCardProps> = ({
 
   const handleButton = () => {
     if (title.trim() === '' || translate.trim() === '') return;
-    const newCard = { title, translate, label };
+    const newCard = {
+      title: title.trim(),
+      translate: translate.trim(),
+      label: label.trim(),
+    };
     dispatch(addCard(newCard));
 
     setTitle('');
