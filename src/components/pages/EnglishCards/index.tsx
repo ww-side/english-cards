@@ -1,7 +1,7 @@
-import CreateCardField from '../../shared/CreateCardField';
 import { FC } from 'react';
-import SearchCardField from '../../shared/SearchCardField';
-import CardList from '../../shared/CardList';
+import CreateCardField from '../../shared/CreateCardField/index.tsx';
+import SearchCardField from '../../shared/SearchCardField/index.tsx';
+import CardList from '../../shared/CardList/index.tsx';
 
 const EnglishCards: FC = () => {
   return (

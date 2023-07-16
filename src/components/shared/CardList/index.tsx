@@ -1,17 +1,19 @@
-import { FC, useState } from 'react';
-import CardListItem from '../CardListItem';
-import DragDropContext from '../DragDropContext';
-import Pagination from '../Pagination';
-import { useAppSelector } from '../../../hooks/redux.ts';
+import { FC } from 'react';
+import CardListItem from '../CardListItem/index.tsx';
+import DragDropContext from '../DragDropContext/index.tsx';
+import Pagination from '../Pagination/index.tsx';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux.ts';
+import { paginationSlice } from '../../../store/reducers/paginationSlice.ts';
 
 const CardList: FC = () => {
-  const { cards } = useAppSelector(state => state.cards);
-  const { filterValue, filterLabelValue } = useAppSelector(
+  const { currentPage, itemsPerPage } = useAppSelector(
+    state => state.pagination
+  );
+  const { filterValue, filterLabelValue, cards } = useAppSelector(
     state => state.cards
   );
-
-  const ITEMS_PER_PAGE = 4;
-  const [currentPage, setCurrentPage] = useState(1);
+  const { setCurrentPage } = paginationSlice.actions;
+  const dispatch = useAppDispatch();
 
   const filteredTasks = cards.filter(
     card =>
@@ -19,27 +21,21 @@ const CardList: FC = () => {
       card.label.toLowerCase().includes(filterLabelValue.toLowerCase())
   );
 
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   const paginatedTasks = filteredTasks.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(filteredTasks.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredTasks.length / itemsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+    dispatch(setCurrentPage(pageNumber));
   };
-
-  console.log(cards);
 
   return (
     <DragDropContext>
       {paginatedTasks.length > 0 ? (
         <>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <Pagination totalPages={totalPages} onPageChange={handlePageChange} />
           {paginatedTasks.map((card, index) => (
             <CardListItem key={card.id} card={card} index={index} />
           ))}

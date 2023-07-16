@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-import CustomModal from '../../common/CustomModal';
-import Input from '../../common/Input';
+import CustomModal from '../../common/CustomModal/index.tsx';
+import Input from '../../common/Input/index.tsx';
+import Button from '../../common/Button/index.tsx';
 import { cardsSlice } from '../../../store/reducers/cardsSlice.ts';
 import { useAppDispatch } from '../../../hooks/redux.ts';
-import Button from '../../common/Button';
 
 interface ModalAddCardProps {
   isModalOpen: boolean;

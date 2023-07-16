@@ -13,7 +13,6 @@ const SwitchPageBtn: FC<SwitchPageBtn> = ({
 }) => {
   return (
     <button
-      key={index}
       className={`mx-1 bg-gray-200 hover:bg-purple-600 
       hover:text-white text-black py-2 px-4 transition 
       duration-300 ease-in-out rounded-xl 

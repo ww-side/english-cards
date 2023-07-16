@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
+import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
+import IconBtn from '../../common/IconBtn/index.tsx';
 import { cardsSlice } from '../../../store/reducers/cardsSlice.ts';
 import { useAppDispatch } from '../../../hooks/redux.ts';
-import IconBtn from '../../common/IconBtn';
 import { TfiClose } from 'react-icons/tfi';
-import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 
 interface CardListItemProps {
   card: {
@@ -65,9 +65,11 @@ const CardListItem: FC<CardListItemProps> = ({ card, index }) => {
   return (
     <div
       ref={node => drag(drop(node))}
-      className={`cursor-pointer flex items-center justify-between shadow-md bg-white mb-3 rounded-2xl p-5 w-3/12 max-lg:w-5/12 max-md:w-7/12 max-sm:w-9/12 ${
-        isDragging ? 'opacity-50' : ''
-      } ${isActive ? 'bg-green-200' : ''}`}
+      className={`cursor-pointer flex items-center justify-between 
+      shadow-md bg-white mb-3 rounded-2xl p-5 w-3/12 max-lg:w-5/12
+      max-md:w-7/12 max-sm:w-9/12 ${isDragging ? 'opacity-50' : ''} ${
+        isActive ? 'bg-green-200' : ''
+      }`}
       onClick={handleTitleClick}
     >
       <div className={`flex flex-col break-all mx-3 font-normal`}>
