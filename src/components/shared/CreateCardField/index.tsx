@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import Button from '../../common/Button/index.tsx';
-import ModalAddCard from '../ModalAddCard';
+import ModalAddCard from '../ModalAddCard/index.tsx';
 import { HiPlus } from 'react-icons/hi';
 
 const CreateTaskField: FC = () => {
