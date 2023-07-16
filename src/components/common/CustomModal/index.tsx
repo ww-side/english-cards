@@ -37,7 +37,7 @@ const CustomModal: FC<CustomModalProps> = ({
     <Modal
       isOpen={isModalOpen}
       onRequestClose={handleCloseModal}
-      className={`bg-purple-600 h-max w-5/12 max-lg:w-8/12 max-md:w-full
+      className={`bg-purple-600 text-white h-max w-5/12 max-lg:w-8/12 max-md:w-full
     p-20 outline-none shadow-sm rounded-b-xl ${
       isClosing
         ? 'animate__animated animate__fadeOutUp'
@@ -46,7 +46,7 @@ const CustomModal: FC<CustomModalProps> = ({
       overlayClassName="fixed top-0 left-0 right-0 bottom-0 flex justify-center"
     >
       <span
-        className="cursor-pointer absolute top-4 right-5 text-2xl text-white font-thin"
+        className="cursor-pointer absolute top-4 right-5 text-2xl font-thin hover:opacity-50 transition duration-200"
         onClick={handleCloseModal}
       >
         X
