@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Screen from './components/common/Screen/index.tsx';
-import EnglishCards from './components/pages/EnglishCards';
+import EnglishCards from './components/pages/EnglishCards/index.tsx';
 import ErrorPage from './components/pages/ErrorPage/index.tsx';
+import EnglishTest from './components/pages/EnglishTest/index.tsx';
+import Home from './components/pages/Home/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -10,7 +12,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/cards',
         element: <EnglishCards />,
+      },
+      {
+        path: '/test',
+        element: <EnglishTest />,
       },
     ],
   },
