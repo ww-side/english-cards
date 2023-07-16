@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ModalTestResult from '../../shared/ModalTestResult/index.tsx';
 import Button from '../../common/Button/index.tsx';
 import TestCard from '../../shared/TestCard/index.tsx';
 import { useAppSelector } from '../../../hooks/redux.ts';
 import { Card } from '../../../interfaces/cards.ts';
 
-const EnglishTest = () => {
+const EnglishTest: FC = () => {
   const { cards } = useAppSelector(state => state.cards);
   const [randomCards, setRandomCards] = useState<Card[]>([]);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -23,6 +23,12 @@ const EnglishTest = () => {
       generateRandomCards();
     }
   }, []);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      setCorrectAnswers(0);
+    }
+  }, [isModalOpen]);
 
   const handleSubmit = () => {
     let count = correctAnswers;
@@ -56,7 +62,7 @@ const EnglishTest = () => {
         randomCards.map(card => <TestCard key={card.id} card={card} />)
       ) : (
         <p className="text-center font-thin text-lg mx-3">
-          No cards found. Add a couple of cards for testing
+          Add a 5 and more cards for testing
         </p>
       )}
       {randomCards.length > 0 && (
