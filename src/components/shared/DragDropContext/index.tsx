@@ -11,9 +11,11 @@ interface DragDropContextProps {
 const HTML5toTouch = {
   backends: [
     {
+      id: 'html5',
       backend: HTML5Backend,
     },
     {
+      id: 'touch',
       backend: TouchBackend,
       options: { enableMouseEvents: true },
       preview: true,
