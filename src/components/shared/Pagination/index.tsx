@@ -1,19 +1,18 @@
 import { FC } from 'react';
-import Button from '../../common/Button';
-import SwitchPageBtn from '../../common/SwitchPageBtn';
+import { nanoid as id } from '@reduxjs/toolkit';
+import Button from '../../common/Button/index.tsx';
+import SwitchPageBtn from '../../common/SwitchPageBtn/index.tsx';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { useAppSelector } from '../../../hooks/redux.ts';
 
 interface PaginationProps {
-  currentPage: number;
   totalPages: number;
   onPageChange: (pageNumber: number) => void;
 }
 
-const Pagination: FC<PaginationProps> = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-}) => {
+const Pagination: FC<PaginationProps> = ({ totalPages, onPageChange }) => {
+  const currentPage = useAppSelector(state => state.pagination.currentPage);
+
   const handlePageClick = (pageNumber: number) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       onPageChange(pageNumber);
@@ -27,6 +26,7 @@ const Pagination: FC<PaginationProps> = ({
       </Button>
       {[...Array(totalPages)].map((_, index) => (
         <SwitchPageBtn
+          key={id()}
           index={index}
           currentPage={currentPage}
           handlePageClick={handlePageClick}
