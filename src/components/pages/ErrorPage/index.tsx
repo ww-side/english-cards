@@ -19,7 +19,9 @@ const ErrorPage = () => {
           my eye on the page you've been searching for.
         </p>
         <Button color="purple">
-          <Link to="/">Go home</Link>
+          <Link className="w-full" to="/">
+            Go home
+          </Link>
         </Button>
       </div>
     </div>
