@@ -18,7 +18,7 @@ const Home: FC = () => {
             English Cards
           </h1>
           {data.map(item => (
-            <p key={item.id} className="mb-2">
+            <p key={item.id} className="mb-2 max-sm:text-center">
               {item.title}
             </p>
           ))}
