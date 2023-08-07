@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import CardListItem from '../CardListItem/index.tsx';
 import DragDropContext from '../DragDropContext/index.tsx';
 import Pagination from '../Pagination/index.tsx';
@@ -31,9 +31,16 @@ const CardList: FC = () => {
     dispatch(setCurrentPage(pageNumber));
   };
 
+  useEffect(() => {
+    if (filteredTasks.length > 0 && currentPage > totalPages) {
+      const newCurrentPage = totalPages > 0 ? totalPages : 1;
+      dispatch(setCurrentPage(newCurrentPage));
+    }
+  }, [filteredTasks.length, currentPage, totalPages, dispatch, setCurrentPage]);
+
   return (
     <DragDropContext>
-      {paginatedTasks.length > 0 ? (
+      {filteredTasks.length > 0 ? (
         <>
           <Pagination totalPages={totalPages} onPageChange={handlePageChange} />
           {paginatedTasks.map((card, index) => (

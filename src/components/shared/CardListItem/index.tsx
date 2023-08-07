@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import IconBtn from '../../common/IconBtn/index.tsx';
 import { cardsSlice } from '../../../store/reducers/cardsSlice.ts';
-import { useAppDispatch } from '../../../hooks/redux.ts';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux.ts';
 import { TfiClose } from 'react-icons/tfi';
 
 interface CardListItemProps {
@@ -16,6 +16,7 @@ interface CardListItemProps {
 }
 
 const CardListItem: FC<CardListItemProps> = ({ card, index }) => {
+  const { cards } = useAppSelector(state => state.cards);
   const { removeCard, updateCardPosition } = cardsSlice.actions;
   const dispatch = useAppDispatch();
   const [showTranslate, setShowTranslate] = useState(false);
@@ -49,10 +50,18 @@ const CardListItem: FC<CardListItemProps> = ({ card, index }) => {
     }),
   });
 
-  const [{ canDrop, isOver }, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop({
     accept: 'CARD',
     drop: (item: { type: string; id: string; index: number }) => {
-      dispatch(updateCardPosition({ id: item.id, newPosition: index }));
+      if (item.id !== card.id) {
+        const cardIndex = cards.findIndex(c => c.id === card.id);
+        dispatch(
+          updateCardPosition({
+            id: item.id,
+            newPosition: cardIndex,
+          })
+        );
+      }
     },
     collect: monitor => ({
       canDrop: monitor.canDrop(),
@@ -60,15 +69,13 @@ const CardListItem: FC<CardListItemProps> = ({ card, index }) => {
     }),
   });
 
-  const isActive = canDrop && isOver;
-
   return (
     <div
       ref={node => drag(drop(node))}
       className={`cursor-pointer flex items-center justify-between 
       shadow-md bg-white mb-3 rounded-2xl p-5 w-3/12 max-lg:w-5/12
       max-md:w-7/12 max-sm:w-9/12 ${isDragging ? 'opacity-50' : ''} ${
-        isActive ? 'bg-green-200' : ''
+        isOver ? 'bg-green-200' : ''
       }`}
       onClick={handleTitleClick}
     >
